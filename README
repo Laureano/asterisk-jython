@@ -1,7 +1,9 @@
 |-- README				You're here.
 `-- tutorial-examples			Examples based on the Asterisk-Java's tutorial.
     |-- live				Usage of the Live API.
-    |   `-- hellolive.py		A script that lists all the channels, queues and meetme rooms.
+    |   |-- hellolive.py		A script that lists all the channels, queues and meetme rooms.
+    |   |-- helloliveevents.py		A script that listen for events.
+    |   `-- helloliveeverything.py	A script that implements property change listener.
     `-- manager				Script that 'do things' through the Asterisk manager interface (AMI).
         |-- helloevents.py		A simple script that listens for events during a time period.
         `-- hellomanager.py		A simple script that sends an action and prints it response.
