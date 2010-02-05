@@ -5,7 +5,6 @@ from javax.swing import JPasswordField
 from javax.swing import JLabel
 from javax.swing import JButton
 from javax.swing import WindowConstants
-from javax.swing import ImageIcon
 from java.awt import GridLayout
 
 class GUI():
