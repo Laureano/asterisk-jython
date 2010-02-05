@@ -37,9 +37,9 @@ class PhoneStatusListener(ManagerEventListener):
             (channelName, randomPart) = event.getChannel().split('-')
             if channelName == self.extensionToMonitor:
                 if isinstance(event, NewStateEvent) and event.getChannelStateDesc() == 'Up':
-                    self.statusUpdater('On the phone')
+                    self.statusUpdater('is now on the phone.')
                 elif isinstance(event, HangupEvent):
-                    self.statusUpdater('Available')
+                    self.statusUpdater('is now available (call ended)')
 
 class GUI():
     def __init__(self):
@@ -136,6 +136,7 @@ class GUI():
 
     def statusUpdater(self, update):
         self.statusLabel.text = update
+        self.twitter.PostUpdate(update)
 
 if __name__ == "__main__":
     GUI()
