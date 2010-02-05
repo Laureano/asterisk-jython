@@ -1,3 +1,4 @@
+# GUI imports
 from javax.swing import JFrame
 from javax.swing import JPanel
 from javax.swing import JTextField
@@ -6,6 +7,24 @@ from javax.swing import JLabel
 from javax.swing import JButton
 from javax.swing import WindowConstants
 from java.awt import GridLayout
+
+# Phone status listener imports
+from org.asteriskjava.manager import ManagerConnectionFactory
+from org.asteriskjava.manager import ManagerEventListener
+
+class PhoneStatusListener(ManagerEventListener):
+    def __init__(self, hostname, username, password):
+        factory = ManagerConnectionFactory(hostname, username, password)
+        self.managerConnection = factory.createManagerConnection()
+
+    def start(self):
+        '''Connect to Asterisk Manager Interface and wait for events'''
+        self.managerConnection.addEventListener(self)
+        self.managerConnection.login()
+
+    def onManagerEvent(self, event):
+        '''Analyze the event type and generate an action according to it's type'''
+        print(event)
 
 class GUI():
     def __init__(self):
@@ -61,9 +80,16 @@ class GUI():
 
     def loginToAsterisk(self, event):
         '''Execute the login procedure to the Asterisk Manager interface'''
-        self.asteriskLoginPanel.visible = False
-        self.renderTwitterLoginPanel()
-        self.frame.pack()
+        self.manager = PhoneStatusListener(self.asteriskHostnameField.text, \
+                                            self.asteriskLoginField.text, \
+                                            self.asteriskPasswordField.text)
+        try:
+            self.manager.start()
+            self.asteriskLoginPanel.visible = False
+            self.renderTwitterLoginPanel()
+            self.frame.pack()
+        except:
+            self.asteriskLoginStatusLabel.text = "Unable to authenticate"
 
     def loginToTwitter(self, event):
         '''Execute the login procedure to the Twitter platform'''
