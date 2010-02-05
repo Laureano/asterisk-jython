@@ -12,6 +12,9 @@ from java.awt import GridLayout
 from org.asteriskjava.manager import ManagerConnectionFactory
 from org.asteriskjava.manager import ManagerEventListener
 
+# Twitter platform
+import twitter
+
 class PhoneStatusListener(ManagerEventListener):
     def __init__(self, hostname, username, password):
         factory = ManagerConnectionFactory(hostname, username, password)
@@ -78,6 +81,15 @@ class GUI():
         self.twitterLoginStatusLabel = JLabel('Awaiting information...')
         self.twitterLoginPanel.add(self.twitterLoginStatusLabel)
 
+    def renderMainPanel(self):
+        '''Render on the frame the main panel with a status label'''
+        self.mainPanel = JPanel(GridLayout(0,2))
+        self.frame.add(self.mainPanel)
+
+        self.mainPanel.add(JLabel('Status:'))
+        self.statusLabel = JLabel('Running...')
+        self.mainPanel.add(self.statusLabel)
+
     def loginToAsterisk(self, event):
         '''Execute the login procedure to the Asterisk Manager interface'''
         self.manager = PhoneStatusListener(self.asteriskHostnameField.text, \
@@ -93,7 +105,15 @@ class GUI():
 
     def loginToTwitter(self, event):
         '''Execute the login procedure to the Twitter platform'''
-        pass
+        try:
+            self.twitter = twitter.Api(username=self.twitterLoginField.text, \
+                                        password=self.twitterPasswordField.text)
+            self.twitter.GetUser(self.twitterLoginField.text)
+            self.twitterLoginPanel.visible = False
+            self.renderMainPanel()
+            self.frame.pack()
+        except:
+            self.twitterLoginStatusLabel.text = "Unable to authenticate"
 
 if __name__ == "__main__":
     GUI()
