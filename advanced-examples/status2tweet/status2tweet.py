@@ -11,14 +11,20 @@ from java.awt import GridLayout
 # Phone status listener imports
 from org.asteriskjava.manager import ManagerConnectionFactory
 from org.asteriskjava.manager import ManagerEventListener
+from org.asteriskjava.manager.event import NewStateEvent
+from org.asteriskjava.manager.event import HangupEvent
 
 # Twitter platform
 import twitter
 
 class PhoneStatusListener(ManagerEventListener):
-    def __init__(self, hostname, username, password):
+    def __init__(self, hostname, username, password, extension):
         factory = ManagerConnectionFactory(hostname, username, password)
         self.managerConnection = factory.createManagerConnection()
+        self.extensionToMonitor = extension
+
+    def addStatusUpdater(self, updater):
+        self.statusUpdater = updater
 
     def start(self):
         '''Connect to Asterisk Manager Interface and wait for events'''
@@ -27,7 +33,13 @@ class PhoneStatusListener(ManagerEventListener):
 
     def onManagerEvent(self, event):
         '''Analyze the event type and generate an action according to it's type'''
-        print(event)
+        if isinstance(event, NewStateEvent) or isinstance(event, HangupEvent):
+            (channelName, randomPart) = event.getChannel().split('-')
+            if channelName == self.extensionToMonitor:
+                if isinstance(event, NewStateEvent) and event.getChannelStateDesc() == 'Up':
+                    self.statusUpdater('On the phone')
+                elif isinstance(event, HangupEvent):
+                    self.statusUpdater('Available')
 
 class GUI():
     def __init__(self):
@@ -54,6 +66,10 @@ class GUI():
         self.asteriskPasswordField = JPasswordField('AsteriskJava', 15)
         self.asteriskLoginPanel.add(JLabel('Password:'))
         self.asteriskLoginPanel.add(self.asteriskPasswordField)
+
+        self.asteriskExtensionField = JTextField('SIP/8011', 15)
+        self.asteriskLoginPanel.add(JLabel('Extension:'))
+        self.asteriskLoginPanel.add(self.asteriskExtensionField)
 
         self.asteriskLoginButton = JButton('Log in', actionPerformed=self.loginToAsterisk)
         self.asteriskLoginPanel.add(self.asteriskLoginButton)
@@ -95,8 +111,10 @@ class GUI():
         '''Execute the login procedure to the Asterisk Manager interface'''
         self.manager = PhoneStatusListener(self.asteriskHostnameField.text, \
                                             self.asteriskLoginField.text, \
-                                            self.asteriskPasswordField.text)
+                                            self.asteriskPasswordField.text, \
+                                            self.asteriskExtensionField.text)
         try:
+            self.manager.addStatusUpdater(self.statusUpdater)
             self.manager.start()
             self.asteriskLoginPanel.visible = False
             self.renderTwitterLoginPanel()
@@ -115,6 +133,9 @@ class GUI():
             self.frame.pack()
         except:
             self.twitterLoginStatusLabel.text = "Unable to authenticate"
+
+    def statusUpdater(self, update):
+        self.statusLabel.text = update
 
 if __name__ == "__main__":
     GUI()
