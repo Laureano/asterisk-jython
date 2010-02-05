@@ -1,4 +1,5 @@
 #!/usr/bin/jython
+# -*- coding: iso-8859-15 -*-
 #
 # Copyright 2010 t-ip: IP Development
 #
