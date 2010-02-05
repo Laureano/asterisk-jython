@@ -87,7 +87,8 @@ class GUI():
         self.frame.add(self.mainPanel)
 
         self.mainPanel.add(JLabel('Status:'))
-        self.statusLabel = JLabel('Running...')
+        self.statusLabel = JTextField('Running...', 15)
+        self.statusLabel.editable = False
         self.mainPanel.add(self.statusLabel)
 
     def loginToAsterisk(self, event):
