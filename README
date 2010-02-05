@@ -1,7 +1,7 @@
 |-- README				You're here.
 |-- advanced-examples			Advanced examples and sample applications.
 |   `-- manager
-|       `-- status2tweet		An application that tweets your phone status.
+|       `-- TwitterPhoneStatusUpdater	An application that tweets your phone status.
 |           `-- status2tweet.py
 `-- tutorial-examples			Examples based on the Asterisk-Java's tutorial.
     |-- live				Usage of the Live API.
