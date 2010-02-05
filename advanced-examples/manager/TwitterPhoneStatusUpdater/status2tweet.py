@@ -76,19 +76,19 @@ class GUI():
         self.asteriskLoginPanel = JPanel(GridLayout(0,2))
         self.frame.add(self.asteriskLoginPanel)
 
-        self.asteriskHostnameField = JTextField('pbx', 15)
+        self.asteriskHostnameField = JTextField('localhost', 15)
         self.asteriskLoginPanel.add(JLabel('Hostname:'))
         self.asteriskLoginPanel.add(self.asteriskHostnameField)
 
-        self.asteriskLoginField = JTextField('asterisk-java', 15)
+        self.asteriskLoginField = JTextField('manager', 15)
         self.asteriskLoginPanel.add(JLabel('Username:'))
         self.asteriskLoginPanel.add(self.asteriskLoginField)
 
-        self.asteriskPasswordField = JPasswordField('AsteriskJava', 15)
+        self.asteriskPasswordField = JPasswordField('pa55word', 15)
         self.asteriskLoginPanel.add(JLabel('Password:'))
         self.asteriskLoginPanel.add(self.asteriskPasswordField)
 
-        self.asteriskExtensionField = JTextField('SIP/8011', 15)
+        self.asteriskExtensionField = JTextField('SIP/John', 15)
         self.asteriskLoginPanel.add(JLabel('Extension:'))
         self.asteriskLoginPanel.add(self.asteriskExtensionField)
 
@@ -104,11 +104,11 @@ class GUI():
         self.twitterLoginPanel = JPanel(GridLayout(0,2))
         self.frame.add(self.twitterLoginPanel)
 
-        self.twitterLoginField = JTextField('TomasLaureano', 15)
+        self.twitterLoginField = JTextField('asterisk-jython', 15)
         self.twitterLoginPanel.add(JLabel('Username:'))
         self.twitterLoginPanel.add(self.twitterLoginField)
 
-        self.twitterPasswordField = JPasswordField('', 15)
+        self.twitterPasswordField = JPasswordField('password', 15)
         self.twitterLoginPanel.add(JLabel('Password:'))
         self.twitterLoginPanel.add(self.twitterPasswordField)
 
