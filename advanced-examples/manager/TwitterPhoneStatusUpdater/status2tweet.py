@@ -75,6 +75,7 @@ class GUI():
         self.asteriskLoginPanel = gui.AsteriskLoginPanel(buttonAction=self.loginToAsterisk)
         self.asteriskLoginPanel.render()
         self.frame.add(self.asteriskLoginPanel)
+        self.asteriskLoginPanel.getRootPane().setDefaultButton(self.asteriskLoginPanel.asteriskLoginButton)
         self.frame.pack()
         self.frame.visible = True
 
@@ -96,6 +97,7 @@ class GUI():
 
         self.twitterLoginButton = JButton('Log in', actionPerformed=self.loginToTwitter)
         self.twitterLoginPanel.add(self.twitterLoginButton)
+        self.twitterLoginPanel.getRootPane().setDefaultButton(self.twitterLoginButton)
 
         self.twitterLoginStatusLabel = JLabel('Awaiting information...')
         self.twitterLoginPanel.add(self.twitterLoginStatusLabel)
