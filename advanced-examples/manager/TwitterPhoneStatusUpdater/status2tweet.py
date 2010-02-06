@@ -125,6 +125,7 @@ class GUI():
             self.manager.start()
             self.asteriskLoginPanel.visible = False
             self.renderTwitterLoginPanel()
+            self.twitterLoginField.requestFocusInWindow()
             self.frame.pack()
         except:
             self.asteriskLoginPanel.asteriskLoginStatusLabel.text = "Unable to authenticate"
