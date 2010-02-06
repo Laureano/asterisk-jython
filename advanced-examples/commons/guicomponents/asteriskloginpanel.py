@@ -20,8 +20,7 @@
 __author__ = 'Tomás Peralta <tomas.peralta(at)t-ip.com.ar'
 
 from javax.swing import JPanel
-from javax.swing import JTextField
-from javax.swing import JPasswordField
+from enhancedfields import EnhancedTextField, EnhancedPasswordField
 from javax.swing import JLabel
 from javax.swing import JButton
 from java.awt import GridLayout
@@ -32,19 +31,19 @@ class AsteriskLoginPanel(JPanel):
         authenticate with the Asterisk manager.'''
         self.layout = GridLayout(0,2)
 
-        self.asteriskHostnameField = JTextField('localhost', 15)
+        self.asteriskHostnameField = EnhancedTextField('localhost', 15)
         self.add(JLabel('Hostname:'))
         self.add(self.asteriskHostnameField)
 
-        self.asteriskLoginField = JTextField('manager', 15)
+        self.asteriskLoginField = EnhancedTextField('manager', 15)
         self.add(JLabel('Username:'))
         self.add(self.asteriskLoginField)
 
-        self.asteriskPasswordField = JPasswordField('pa55word', 15)
+        self.asteriskPasswordField = EnhancedPasswordField('pa55word', 15)
         self.add(JLabel('Password:'))
         self.add(self.asteriskPasswordField)
 
-        self.asteriskExtensionField = JTextField('SIP/John', 15)
+        self.asteriskExtensionField = EnhancedTextField('SIP/John', 15)
         self.add(JLabel('Extension:'))
         self.add(self.asteriskExtensionField)
 

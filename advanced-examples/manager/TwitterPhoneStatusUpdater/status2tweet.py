@@ -23,7 +23,6 @@ __author__ = 'Tomás Peralta <tomas.peralta(at)t-ip.com.ar'
 from javax.swing import JFrame
 from javax.swing import JPanel
 from javax.swing import JTextField
-from javax.swing import JPasswordField
 from javax.swing import JLabel
 from javax.swing import JButton
 from javax.swing import WindowConstants
@@ -33,6 +32,7 @@ from java.awt import GridLayout
 import sys
 sys.path.append('../../')
 from commons.guicomponents import asteriskloginpanel as gui
+import commons.guicomponents.enhancedfields as extragui
 
 # Phone status listener imports
 from org.asteriskjava.manager import ManagerConnectionFactory
@@ -83,11 +83,11 @@ class GUI():
         self.twitterLoginPanel = JPanel(GridLayout(0,2))
         self.frame.add(self.twitterLoginPanel)
 
-        self.twitterLoginField = JTextField('asterisk-jython', 15)
+        self.twitterLoginField = extragui.EnhancedTextField('asterisk-jython', 15)
         self.twitterLoginPanel.add(JLabel('Username:'))
         self.twitterLoginPanel.add(self.twitterLoginField)
 
-        self.twitterPasswordField = JPasswordField('password', 15)
+        self.twitterPasswordField = extragui.EnhancedPasswordField('password', 15)
         self.twitterLoginPanel.add(JLabel('Password:'))
         self.twitterLoginPanel.add(self.twitterPasswordField)
 
