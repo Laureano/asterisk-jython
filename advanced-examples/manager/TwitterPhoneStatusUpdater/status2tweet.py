@@ -27,6 +27,7 @@ from javax.swing import JLabel
 from javax.swing import JButton
 from javax.swing import WindowConstants
 from java.awt import GridLayout
+from javax.swing import BorderFactory
 
 # Custom GUI components
 import sys
@@ -82,6 +83,8 @@ class GUI():
         authenticate with the Twitter API.'''
         self.twitterLoginPanel = JPanel(GridLayout(0,2))
         self.frame.add(self.twitterLoginPanel)
+        
+        self.twitterLoginPanel.setBorder(BorderFactory.createTitledBorder('Twitter account information'))
 
         self.twitterLoginField = extragui.EnhancedTextField('asterisk-jython', 15)
         self.twitterLoginPanel.add(JLabel('Username:'))
@@ -101,6 +104,8 @@ class GUI():
         '''Render on the frame the main panel with a status label'''
         self.mainPanel = JPanel(GridLayout(0,2))
         self.frame.add(self.mainPanel)
+
+        self.mainPanel.setBorder(BorderFactory.createTitledBorder('Application status'))
 
         self.mainPanel.add(JLabel('Status:'))
         self.statusLabel = JTextField('Running...', 15)

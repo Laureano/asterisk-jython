@@ -24,12 +24,15 @@ from enhancedfields import EnhancedTextField, EnhancedPasswordField
 from javax.swing import JLabel
 from javax.swing import JButton
 from java.awt import GridLayout
+from javax.swing import BorderFactory
 
 class AsteriskLoginPanel(JPanel):
     def render(self):
         '''Render on the frame the login panel with the fields needed to
         authenticate with the Asterisk manager.'''
         self.layout = GridLayout(0,2)
+
+        self.setBorder(BorderFactory.createTitledBorder('Asterisk account information'))
 
         self.asteriskHostnameField = EnhancedTextField('localhost', 15)
         self.add(JLabel('Hostname:'))
