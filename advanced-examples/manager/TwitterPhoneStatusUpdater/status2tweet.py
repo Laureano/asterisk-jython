@@ -75,7 +75,7 @@ class GUI():
         self.asteriskLoginPanel = gui.AsteriskLoginPanel(buttonAction=self.loginToAsterisk)
         self.asteriskLoginPanel.render()
         self.frame.add(self.asteriskLoginPanel)
-        self.asteriskLoginPanel.getRootPane().setDefaultButton(self.asteriskLoginPanel.asteriskLoginButton)
+        self.asteriskLoginPanel.getRootPane().setDefaultButton(self.asteriskLoginPanel.login)
         self.frame.pack()
         self.frame.visible = True
 
@@ -116,10 +116,10 @@ class GUI():
 
     def loginToAsterisk(self, event):
         '''Execute the login procedure to the Asterisk Manager interface'''
-        self.manager = PhoneStatusListener(self.asteriskLoginPanel.asteriskHostnameField.text, \
-                                            self.asteriskLoginPanel.asteriskLoginField.text, \
-                                            self.asteriskLoginPanel.asteriskPasswordField.text, \
-                                            self.asteriskLoginPanel.asteriskExtensionField.text)
+        self.manager = PhoneStatusListener(self.asteriskLoginPanel.hostname.text, \
+                                            self.asteriskLoginPanel.username.text, \
+                                            self.asteriskLoginPanel.password.text, \
+                                            self.asteriskLoginPanel.extension.text)
         try:
             self.manager.addStatusUpdater(self.statusUpdater)
             self.manager.start()
@@ -128,7 +128,7 @@ class GUI():
             self.twitterLoginField.requestFocusInWindow()
             self.frame.pack()
         except:
-            self.asteriskLoginPanel.asteriskLoginStatusLabel.text = "Unable to authenticate"
+            self.asteriskLoginPanel.status.text = "Unable to authenticate"
 
     def loginToTwitter(self, event):
         '''Execute the login procedure to the Twitter platform'''

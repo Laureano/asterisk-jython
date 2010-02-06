@@ -34,24 +34,24 @@ class AsteriskLoginPanel(JPanel):
 
         self.setBorder(BorderFactory.createTitledBorder('Asterisk account information'))
 
-        self.asteriskHostnameField = EnhancedTextField('localhost', 15)
+        self.hostname = EnhancedTextField('localhost', 15)
         self.add(JLabel('Hostname:'))
-        self.add(self.asteriskHostnameField)
+        self.add(self.hostname)
 
-        self.asteriskLoginField = EnhancedTextField('manager', 15)
+        self.username = EnhancedTextField('manager', 15)
         self.add(JLabel('Username:'))
-        self.add(self.asteriskLoginField)
+        self.add(self.username)
 
-        self.asteriskPasswordField = EnhancedPasswordField('pa55word', 15)
+        self.password = EnhancedPasswordField('pa55word', 15)
         self.add(JLabel('Password:'))
-        self.add(self.asteriskPasswordField)
+        self.add(self.password)
 
-        self.asteriskExtensionField = EnhancedTextField('SIP/John', 15)
+        self.extension = EnhancedTextField('SIP/John', 15)
         self.add(JLabel('Extension:'))
-        self.add(self.asteriskExtensionField)
+        self.add(self.extension)
 
-        self.asteriskLoginButton = JButton('Log in', actionPerformed=self.buttonAction)
-        self.add(self.asteriskLoginButton)
+        self.login = JButton('Log in', actionPerformed=self.buttonAction)
+        self.add(self.login)
 
-        self.asteriskLoginStatusLabel = JLabel('Awaiting information...')
-        self.add(self.asteriskLoginStatusLabel)
+        self.status = JLabel('Awaiting information...')
+        self.add(self.status)
